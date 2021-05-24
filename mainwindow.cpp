@@ -1,4 +1,4 @@
-#include "mainwindow2.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include <qapplication.h>
@@ -15,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("憨憨压缩");
-    this->setWindowIcon(QIcon("hanhan.png"));
 }
 
 MainWindow::~MainWindow()
@@ -38,9 +37,9 @@ void MainWindow::on_pushButton_clicked()
             string s_filename2 = s_filename1.substr(0,s_filename1.rfind("."));
             string s_fileSuffixname = s_filename1.substr(s_filename1.find_last_of('.')+1);
             string out_filename = dir2+"/"+s_filename2+"_"+s_fileSuffixname+".lzt";
-            Huffman h(s_filename, out_filename);
 
-            h.compress();
+
+            compress(s_filename, out_filename);
             QMessageBox::information(this,"Compress","Successfully compressed",QMessageBox::Ok);
 
         }else
@@ -62,8 +61,7 @@ void MainWindow::on_pushButton_2_clicked()
             string s_filename4 = s_filename2.substr(0,s_filename2.rfind("_"));
             string out_filename = dir2+"/"+s_filename4+"."+s_filename3;
 
-            Huffman h(s_filename, out_filename);
-            h.decompress();
+            decompress(s_filename, out_filename);
             QMessageBox::information(this,"Decompress","Successfully decompress",QMessageBox::Ok);
 
         }
