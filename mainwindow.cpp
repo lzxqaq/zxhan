@@ -33,13 +33,12 @@ void MainWindow::on_pushButton_clicked()
             string dir2 = dir.toStdString();
 
             string s_filename1(s_filename.substr(s_filename.find_last_of("/")+1));
-            cout<<"s_f1 =   "<<s_filename1<<endl;
             string s_filename2 = s_filename1.substr(0,s_filename1.rfind("."));
             string s_fileSuffixname = s_filename1.substr(s_filename1.find_last_of('.')+1);
             string out_filename = dir2+"/"+s_filename2+"_"+s_fileSuffixname+".lzt";
 
-
             compress(s_filename, out_filename);
+
             QMessageBox::information(this,"Compress","Successfully compressed",QMessageBox::Ok);
 
         }else
@@ -51,6 +50,7 @@ void MainWindow::on_pushButton_2_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this,"Please choose a file to decompress",QDir::currentPath(),"lztfiles(*.lzt)");
         if(!filename.isNull()){
+
             QString dir = QFileDialog::getExistingDirectory(this,tr("Please choose the file you want to decompress"),"/home",QFileDialog::ShowDirsOnly|QFileDialog::DontResolveSymlinks);
             string dir2 = dir.toStdString();
 
@@ -62,6 +62,7 @@ void MainWindow::on_pushButton_2_clicked()
             string out_filename = dir2+"/"+s_filename4+"."+s_filename3;
 
             decompress(s_filename, out_filename);
+
             QMessageBox::information(this,"Decompress","Successfully decompress",QMessageBox::Ok);
 
         }
