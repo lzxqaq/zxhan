@@ -24,12 +24,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QString filename = QFileDialog::getOpenFileName(this,"Please choose a file to compress",QDir::currentPath(),"All files(*.*)");
+    QString filename = QFileDialog::getOpenFileName(this,"请选择需要压缩的文件",QDir::currentPath(),"All files(*.*)");
         string s_filename = filename.toStdString( );
 
         if(!filename.isNull()){
-            QMessageBox::information(this,"Compress","Successfully choosed",QMessageBox::Ok);
-            QString dir = QFileDialog::getExistingDirectory(this,tr("please choose a path to keep"),"/home",QFileDialog::ShowDirsOnly|QFileDialog::DontResolveSymlinks);
+            QMessageBox::information(this,"压缩","选择成功",QMessageBox::Ok);
+            QString dir = QFileDialog::getExistingDirectory(this,tr("选择压缩文件存放路径"),"./",QFileDialog::ShowDirsOnly|QFileDialog::DontResolveSymlinks);
             string dir2 = dir.toStdString();
 
             string s_filename1(s_filename.substr(s_filename.find_last_of("/")+1));
@@ -39,19 +39,19 @@ void MainWindow::on_pushButton_clicked()
 
             compress(s_filename, out_filename);
 
-            QMessageBox::information(this,"Compress","Successfully compressed",QMessageBox::Ok);
+            QMessageBox::information(this,"压缩","压缩成功",QMessageBox::Ok);
 
         }else
-            QMessageBox::information(this,"Document","Cannot find the document",QMessageBox::Ok|QMessageBox::Cancel);
+            QMessageBox::information(this,"出错","没有选择文件",QMessageBox::Ok|QMessageBox::Cancel);
 
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    QString filename = QFileDialog::getOpenFileName(this,"Please choose a file to decompress",QDir::currentPath(),"lztfiles(*.lzt)");
+    QString filename = QFileDialog::getOpenFileName(this,"请选择需要解压缩的文件",QDir::currentPath(),"lztfiles(*.lzt)");
         if(!filename.isNull()){
 
-            QString dir = QFileDialog::getExistingDirectory(this,tr("Please choose the file you want to decompress"),"/home",QFileDialog::ShowDirsOnly|QFileDialog::DontResolveSymlinks);
+            QString dir = QFileDialog::getExistingDirectory(this,tr("选择解压缩文件存放路径"),"./",QFileDialog::ShowDirsOnly|QFileDialog::DontResolveSymlinks);
             string dir2 = dir.toStdString();
 
             string s_filename = filename.toStdString();
@@ -63,11 +63,11 @@ void MainWindow::on_pushButton_2_clicked()
 
             decompress(s_filename, out_filename);
 
-            QMessageBox::information(this,"Decompress","Successfully decompress",QMessageBox::Ok);
+            QMessageBox::information(this,"解压","解压成功",QMessageBox::Ok);
 
         }
         else
-            QMessageBox::information(this,"Document","Cannot find the document",QMessageBox::Ok|QMessageBox::Cancel);
+            QMessageBox::information(this,"出错","没有选择文件",QMessageBox::Ok|QMessageBox::Cancel);
 
 
 }
